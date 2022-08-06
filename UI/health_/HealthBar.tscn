@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://_art/heart.png" type="Texture" id=1]
+[ext_resource path="res://UI/health_/HealthBar.gd" type="Script" id=2]
+
+[node name="HealthBar" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 64.0
+margin_bottom = 64.0
+rect_scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 1 )
+stretch_mode = 2

@@ -1,0 +1,309 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://Characters/Player/character_sprite.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Characters/Player/state_change_label.gd" type="Script" id=2]
+[ext_resource path="res://Characters/Player/Player_.gd" type="Script" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 6.0
+height = 30.0
+
+[sub_resource type="Animation" id=15]
+resource_name = "double_jump"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "double_jump_blast" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../AnimationTree:parameters/double_jump/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "falling"
+length = 0.05
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "falling_anim" ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "player_hit1_anim" ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_hit_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+length = 0.05
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "idle_anim" ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "jump"
+length = 0.05
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "jump_anim" ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "land"
+length = 0.05
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "land_anim" ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "walk"
+length = 0.05
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "walk_anim" ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "wall_slide"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "wall_slide_anim" ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "falling"
+
+[sub_resource type="AnimationNodeAnimation" id=18]
+animation = "double_jump"
+
+[sub_resource type="AnimationNodeAnimation" id=23]
+animation = "hit"
+
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "wall_slide"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "jump"
+
+[sub_resource type="AnimationNodeOneShot" id=17]
+fadein_time = 0.0
+fadeout_time = 0.0
+
+[sub_resource type="AnimationNodeOneShot" id=21]
+fadein_time = 0.0
+fadeout_time = 0.0
+
+[sub_resource type="AnimationNodeBlend2" id=26]
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "walk"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "walk"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=8]
+blend_point_0/node = SubResource( 5 )
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource( 6 )
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource( 7 )
+blend_point_2/pos = -1.0
+
+[sub_resource type="AnimationNodeBlend3" id=14]
+
+[sub_resource type="AnimationNodeBlendTree" id=9]
+graph_offset = Vector2( -244, -86.6241 )
+nodes/Animation/node = SubResource( 13 )
+nodes/Animation/position = Vector2( -1180, -140 )
+"nodes/Animation 2/node" = SubResource( 12 )
+"nodes/Animation 2/position" = Vector2( -1200, 160 )
+"nodes/Animation 3/node" = SubResource( 18 )
+"nodes/Animation 3/position" = Vector2( -840, 40 )
+"nodes/Animation 4/node" = SubResource( 23 )
+"nodes/Animation 4/position" = Vector2( 40, 60 )
+"nodes/Animation 5/node" = SubResource( 25 )
+"nodes/Animation 5/position" = Vector2( -420, 40 )
+nodes/double_jump/node = SubResource( 17 )
+nodes/double_jump/position = Vector2( -720, -180 )
+nodes/hit/node = SubResource( 21 )
+nodes/hit/position = Vector2( 240, -100 )
+nodes/is_on_wall/node = SubResource( 26 )
+nodes/is_on_wall/position = Vector2( -160, -160 )
+nodes/output/position = Vector2( 460, 80 )
+nodes/x_sign/node = SubResource( 8 )
+nodes/x_sign/position = Vector2( -1240, 0 )
+nodes/y_sign/node = SubResource( 14 )
+nodes/y_sign/position = Vector2( -920, -160 )
+node_connections = [ "double_jump", 0, "y_sign", "double_jump", 1, "Animation 3", "y_sign", 0, "Animation", "y_sign", 1, "x_sign", "y_sign", 2, "Animation 2", "hit", 0, "is_on_wall", "hit", 1, "Animation 4", "is_on_wall", 0, "double_jump", "is_on_wall", 1, "Animation 5", "output", 0, "hit" ]
+
+[sub_resource type="RectangleShape2D" id=19]
+extents = Vector2( 9.125, 1 )
+
+[node name="Player_" type="KinematicBody2D"]
+collision_layer = 8
+script = ExtResource( 3 )
+health = 10.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+animation = "idle_anim"
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 8 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimatedSprite")
+anims/double_jump = SubResource( 15 )
+anims/falling = SubResource( 10 )
+anims/hit = SubResource( 22 )
+anims/idle = SubResource( 2 )
+anims/jump = SubResource( 3 )
+anims/land = SubResource( 11 )
+anims/walk = SubResource( 4 )
+anims/wall_slide = SubResource( 24 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 9 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/double_jump/active = false
+parameters/hit/active = false
+parameters/is_on_wall/blend_amount = 0
+parameters/x_sign/blend_position = 0
+parameters/y_sign/blend_amount = 0.0
+
+[node name="state_change_label" type="Label" parent="."]
+margin_left = -20.0
+margin_top = -32.0
+margin_right = 20.0
+margin_bottom = -18.0
+text = "none"
+script = ExtResource( 2 )
+
+[node name="jumpHitBox" type="Area2D" parent="."]
+position = Vector2( 0, 32 )
+collision_layer = 0
+collision_mask = 2048
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="jumpHitBox"]
+position = Vector2( 2.875, -2 )
+shape = SubResource( 19 )
+
+[node name="hurt_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="wall_jump_timer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="drop_timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="changed_state" from="." to="state_change_label" method="_on_Player__changed_state"]
+[connection signal="tree_entered" from="." to="." method="_on_Player__tree_entered"]
+[connection signal="area_shape_entered" from="jumpHitBox" to="." method="_on_jumpHitBox_area_shape_entered"]
